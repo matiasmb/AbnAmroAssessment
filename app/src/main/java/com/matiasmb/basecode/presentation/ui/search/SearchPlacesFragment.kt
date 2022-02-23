@@ -17,7 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.matiasmb.basecode.R
 import com.matiasmb.basecode.databinding.FragmentSearchPlacesBinding
 import com.matiasmb.basecode.domain.model.ItemPlaceView
-import com.matiasmb.basecode.extensions.viewBinding
+import com.matiasmb.basecode.util.viewBinding
 import com.matiasmb.basecode.presentation.ViewModelFactory
 import com.matiasmb.basecode.presentation.ui.search.SearchPlacesViewState.ViewStateContent.*
 import com.xwray.groupie.GroupAdapter

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.matiasmb.basecode.domain.interactor.GetPlacesInteractor
 import com.matiasmb.basecode.domain.model.ItemPlaceView
+import com.matiasmb.basecode.util.Resource
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,11 +37,10 @@ class SearchPlacesViewModel @Inject constructor(
         }
 
         viewModelScope.launch(viewModelScope.coroutineContext) {
-            findProductsUseCase.fetchPlaces(nearLocation).collect {
-                it?.let {
-                    handleLoadPlace(it)
-                } ?: run {
-                    handleError()
+            findProductsUseCase.fetchPlaces(nearLocation).collect { response ->
+                when (response) {
+                    is Resource.Error -> response.data?.let { handleLoadPlace(it) } ?: run { handleError() }
+                    is Resource.Success -> response.data?.let { handleLoadPlace(it) } ?: run { handleError() }
                 }
             }
         }

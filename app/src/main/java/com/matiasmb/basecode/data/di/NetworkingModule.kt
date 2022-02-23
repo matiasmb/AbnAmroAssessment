@@ -1,8 +1,15 @@
 package com.matiasmb.basecode.data.di
 
+import android.app.Application
+import android.content.Context
+import androidx.room.Room
 import com.google.gson.GsonBuilder
 import com.matiasmb.basecode.BuildConfig
+import com.matiasmb.basecode.MyApplication
 import com.matiasmb.basecode.data.FoursquareApiClient
+import com.matiasmb.basecode.database.PlaceDatabase
+import com.matiasmb.basecode.data.repository.PlacesRepository
+import com.matiasmb.basecode.data.service.PlacesApiService
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides
@@ -36,5 +43,17 @@ class NetworkingModule {
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build()
             .create(FoursquareApiClient::class.java)
+    }
+
+    @Provides
+    fun provideDatabase(app: MyApplication): PlaceDatabase =
+        Room.databaseBuilder(app, PlaceDatabase::class.java, "PlacesDatabase").build()
+
+    @Provides
+    fun provideRepository(
+        placesApiService: PlacesApiService,
+        placeDatabase: PlaceDatabase
+    ): PlacesRepository {
+        return PlacesRepository(placesApiService, placeDatabase)
     }
 }

@@ -1,4 +1,4 @@
-package com.matiasmb.basecode.extensions
+package com.matiasmb.basecode.util
 
 import android.view.View
 import androidx.fragment.app.Fragment

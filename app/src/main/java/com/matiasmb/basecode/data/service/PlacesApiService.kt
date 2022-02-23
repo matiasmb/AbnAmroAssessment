@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface PlacesApiService {
 
-    suspend fun getPlacesByNearLocation(nearLocation: String): Flow<ResponseType<PlaceSearchResponse>>
+    suspend fun getPlacesByNearLocation(nearLocation: String): List<Place>
 
-    suspend fun getPlacesDetails(placeId: String): Flow<ResponseType<Place>>
+    suspend fun getPlacesDetails(placeId: String): Place
 }

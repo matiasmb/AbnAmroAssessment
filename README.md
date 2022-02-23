@@ -17,9 +17,13 @@
 - View binding
 - Retrofit 
 - Glide
+- Room
 
 #Foursquare API 
 - For this project I use foursquare v3 with places instead of v2 with venues.
 ![](postman-error.png)
 - The main difference there is the property id (now is fsq_id) and the filters that you can provide to the search.
 
+#Cache strategy
+- This could be better, actually the fetch information from the api is always called inside of networkBoundResource. 
+  But if we modify the parameter should fetch we can define our own strategy

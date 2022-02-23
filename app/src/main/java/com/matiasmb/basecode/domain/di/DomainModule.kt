@@ -1,5 +1,6 @@
 package com.matiasmb.basecode.domain.di
 
+import com.matiasmb.basecode.data.repository.PlacesRepository
 import com.matiasmb.basecode.data.service.PlacesApiService
 import com.matiasmb.basecode.domain.interactor.GetPlaceDetailInteractor
 import com.matiasmb.basecode.domain.interactor.GetPlaceDetailInteractorImpl
@@ -14,13 +15,13 @@ class DomainModule {
 
     @ExperimentalCoroutinesApi
     @Provides
-    fun provideGetPlacesInteractor(placesApiService: PlacesApiService): GetPlacesInteractor {
-        return GetPlacesInteractorImpl(placesApiService)
+    fun provideGetPlacesInteractor(placesRepository: PlacesRepository): GetPlacesInteractor {
+        return GetPlacesInteractorImpl(placesRepository)
     }
 
     @ExperimentalCoroutinesApi
     @Provides
-    fun provideGetPlaceDetailsInteractor(placesApiService: PlacesApiService): GetPlaceDetailInteractor {
-        return GetPlaceDetailInteractorImpl(placesApiService)
+    fun provideGetPlaceDetailsInteractor(placesRepository: PlacesRepository): GetPlaceDetailInteractor {
+        return GetPlaceDetailInteractorImpl(placesRepository)
     }
 }

@@ -6,6 +6,7 @@ import com.matiasmb.basecode.domain.interactor.GetPlaceDetailInteractor
 import com.matiasmb.basecode.domain.model.PlaceView
 import com.matiasmb.basecode.presentation.ui.detail.DetailPlaceViewState.ViewStateContent.Error
 import com.matiasmb.basecode.presentation.ui.detail.DetailPlaceViewState.ViewStateContent.LoadData
+import com.matiasmb.basecode.util.Resource
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -25,11 +26,10 @@ class DetailPlaceViewModel @Inject constructor(
 
     private fun handleInitial() {
         viewModelScope.launch {
-            getPlaceDetailInteractor.fetchPlaceDetails(viewState.placeId).collect {
-                it?.let {
-                    handleLoadPlace(it)
-                } ?: run {
-                    handleError()
+            getPlaceDetailInteractor.fetchPlaceDetails(viewState.placeId).collect { response ->
+                when (response) {
+                    is Resource.Error -> response.data?.let { handleLoadPlace(it) } ?: run { handleError() }
+                    is Resource.Success -> response.data?.let { handleLoadPlace(it) } ?: run { handleError() }
                 }
             }
         }
