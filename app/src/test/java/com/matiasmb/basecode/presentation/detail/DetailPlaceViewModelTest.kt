@@ -3,7 +3,7 @@ package com.matiasmb.basecode.presentation.detail
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.matiasmb.basecode.CoroutinesRule
 import com.matiasmb.basecode.TestData
-import com.matiasmb.basecode.TestData.flowNull
+import com.matiasmb.basecode.TestData.flowDetailNull
 import com.matiasmb.basecode.domain.interactor.GetPlaceDetailInteractor
 import com.matiasmb.basecode.presentation.ui.detail.DetailPlaceViewModel
 import com.matiasmb.basecode.presentation.ui.detail.DetailPlaceViewState
@@ -62,7 +62,7 @@ class DetailPlaceViewModelTest {
             launch(Dispatchers.Main) {
                 // GIVEN
                 val getPlaceDetailInteractor = mock<GetPlaceDetailInteractor> {
-                    onBlocking { fetchPlaceDetails(anyString()) } doReturn flowNull
+                    onBlocking { fetchPlaceDetails(anyString()) } doReturn flowDetailNull
                 }
                 val viewState = DetailPlaceViewState(
                     placeId = "mockId",

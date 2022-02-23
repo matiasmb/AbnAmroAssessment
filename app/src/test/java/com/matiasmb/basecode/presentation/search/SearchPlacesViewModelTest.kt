@@ -72,7 +72,7 @@ class SearchPlacesViewModelTest {
             launch(Dispatchers.Main) {
                 // GIVEN
                 val getPlacesInteractor = mock<GetPlacesInteractor> {
-                    onBlocking { fetchPlaces(anyString()) } doReturn TestData.flowNull
+                    onBlocking { fetchPlaces(anyString()) } doReturn TestData.flowSearchNull
                 }
                 val viewState = SearchPlacesViewState(
                     content = Initial

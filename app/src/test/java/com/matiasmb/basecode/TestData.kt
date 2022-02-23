@@ -4,9 +4,9 @@ import com.matiasmb.basecode.data.dto.Location
 import com.matiasmb.basecode.data.dto.Photo
 import com.matiasmb.basecode.data.dto.Place
 import com.matiasmb.basecode.data.dto.PlaceSearchResponse
-import com.matiasmb.basecode.data.service.ResponseType
 import com.matiasmb.basecode.domain.model.ItemPlaceView
 import com.matiasmb.basecode.domain.model.PlaceView
+import com.matiasmb.basecode.util.Resource
 import kotlinx.coroutines.flow.flow
 
 object TestData {
@@ -61,42 +61,50 @@ object TestData {
     )
 
     val serviceSuccessSearchPlacesResponse =
-        flow { emit(ResponseType.Success(dataPlaceSearchResponse)) }
+        flow { emit(Resource.Success(dataPlaceSearchResponse.results)) }
 
-    val serviceSuccessDetailPlaceResponse = flow { emit(ResponseType.Success(placeDetailSearch)) }
+    val serviceSuccessDetailPlaceResponse = flow { emit(Resource.Success(placeDetailSearch)) }
 
-    val serviceFailureResponse = flow { emit(ResponseType.Failure) }
+    val serviceFailureDetailResponse = flow { emit(Resource.Error(null, null) as Resource<Place> ) }
+
+    val serviceFailureSearchResponse = flow { emit(Resource.Error(null, null) as Resource<List<Place>> ) }
 
     val placeViewListFlow = flow {
         emit(
-            listOf(
-                ItemPlaceView(
-                    name = "De Bijenkorf",
-                    formattedAddress = "Address: Coolsingel 105\n" +
-                            "Postal code: 3012 AG\n" +
-                            "City: Rotterdam",
-                    id = "5b6a9a644ac28a002cf131d0"
+            Resource.Success(
+                listOf(
+                    ItemPlaceView(
+                        name = "De Bijenkorf",
+                        formattedAddress = "Address: Coolsingel 105\n" +
+                                "Postal code: 3012 AG\n" +
+                                "City: Rotterdam",
+                        id = "5b6a9a644ac28a002cf131d0"
+                    )
                 )
-            )
+            ) as Resource<List<ItemPlaceView>?>
         )
     }
 
     val placeViewFlow = flow {
         emit(
-            PlaceView(
-                name = "De Bijenkorf",
-                formattedAddress = "Address: Coolsingel 105\n" +
-                        "Postal code: 3012 AG\n" +
-                        "City: Rotterdam",
-                description = "Swatch, launched in 1983 by Nicolas G. Hayek, is a leading Swiss watch maker and one of the world's most popular brands",
-                imageUrl = "https://fastly.4sqi.net/img/general/original//82624_qd27oVHlkCg3gayZWMAbQV3SoeIM4u4rMgUZlKWLs2U.jpg",
-                contactInformation = "Telephone: 010 282 3700\n" +
-                        "Email: testEmail\n" +
-                        "Website: http://www.debijenkorf.nl",
-                rating = 8.3F
-            )
+            Resource.Success(
+                PlaceView(
+                    name = "De Bijenkorf",
+                    formattedAddress = "Address: Coolsingel 105\n" +
+                            "Postal code: 3012 AG\n" +
+                            "City: Rotterdam",
+                    description = "Swatch, launched in 1983 by Nicolas G. Hayek, is a leading Swiss watch maker and one of the world's most popular brands",
+                    imageUrl = "https://fastly.4sqi.net/img/general/original//82624_qd27oVHlkCg3gayZWMAbQV3SoeIM4u4rMgUZlKWLs2U.jpg",
+                    contactInformation = "Telephone: 010 282 3700\n" +
+                            "Email: testEmail\n" +
+                            "Website: http://www.debijenkorf.nl",
+                    rating = 8.3F
+                )
+            ) as Resource<PlaceView?>
         )
     }
 
-    val flowNull = flow { emit(null) }
+    val flowDetailNull = flow { emit(Resource.Error(null, null) as Resource<PlaceView?>) }
+
+    val flowSearchNull = flow { emit(Resource.Error(null, null) as Resource<List<ItemPlaceView>?>) }
 }

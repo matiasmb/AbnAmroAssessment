@@ -3,25 +3,20 @@ package com.matiasmb.basecode.data.networking
 import com.matiasmb.basecode.TestData
 import com.matiasmb.basecode.data.FoursquareApiClient
 import com.matiasmb.basecode.data.dto.Place
-import com.matiasmb.basecode.data.dto.PlaceSearchResponse
 import com.matiasmb.basecode.data.service.PlacesApiServiceImpl
-import com.matiasmb.basecode.data.service.ResponseType
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 
-@ExperimentalCoroutinesApi
 class PlacesApiServiceImplTest {
 
     private lateinit var placesApiService: PlacesApiServiceImpl
 
     @Test
-    fun `searchPlaces WHEN FoursquareApiClient give a successful response SHOULD return a non empty list of places inside the response`() {
+    fun `getPlacesByNearLocation WHEN FoursquareApiClient give a successful response SHOULD return a non empty list of places inside the response`() {
         runBlocking {
             // GIVEN
             val apiClient = mock<FoursquareApiClient> {
@@ -34,19 +29,16 @@ class PlacesApiServiceImplTest {
             placesApiService = PlacesApiServiceImpl(apiClient)
 
             //WHEN
-            val response: Flow<ResponseType<PlaceSearchResponse>> =
-                placesApiService.getPlacesByNearLocation("Rotterdam")
+            val response: List<Place> = placesApiService.getPlacesByNearLocation("Rotterdam")
 
             //THEN
-            response.collect {
-                assertTrue(it is ResponseType.Success)
-                assertTrue((it as ResponseType.Success).data.results.isNotEmpty())
-            }
+            assertTrue(response.isNotEmpty())
         }
+
     }
 
     @Test
-    fun `searchProducts WHEN FoursquareApiClient give a successful response SHOULD return a Failure Type`() {
+    fun `getPlacesByNearLocation WHEN FoursquareApiClient give a successful response with an empty list SHOULD return an empty list`() {
         runBlocking {
             // GIVEN
             val apiClient = mock<FoursquareApiClient> {
@@ -59,12 +51,10 @@ class PlacesApiServiceImplTest {
             placesApiService = PlacesApiServiceImpl(apiClient)
 
             //WHEN
-            val response: Flow<ResponseType<PlaceSearchResponse>> = placesApiService.getPlacesByNearLocation("Rotterdam")
+            val response: List<Place> = placesApiService.getPlacesByNearLocation("Rotterdam")
 
             //THEN
-            response.collect {
-                assertTrue(it is ResponseType.Failure)
-            }
+            assertTrue(response.isEmpty())
         }
     }
 
@@ -83,15 +73,12 @@ class PlacesApiServiceImplTest {
             placesApiService = PlacesApiServiceImpl(apiClient)
 
             //WHEN
-            val response: Flow<ResponseType<Place>> =
+            val response: Place =
                 placesApiService.getPlacesDetails(mockId)
 
             //THEN
-            response.collect {
-                assertTrue(it is ResponseType.Success)
-                assertTrue((it as ResponseType.Success).data.id == mockId)
-                assertTrue(it.data.photos?.isNotEmpty() == true)
-            }
+                assertTrue(response.id == mockId)
+                assertTrue(response.photos?.isNotEmpty() == true)
         }
     }
 }

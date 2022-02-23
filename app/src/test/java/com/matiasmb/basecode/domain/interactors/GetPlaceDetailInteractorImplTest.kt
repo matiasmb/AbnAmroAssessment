@@ -4,8 +4,9 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.matiasmb.basecode.CoroutinesRule
 import com.matiasmb.basecode.TestData
 import com.matiasmb.basecode.TestData.location
-import com.matiasmb.basecode.data.service.PlacesApiService
+import com.matiasmb.basecode.data.repository.PlacesRepository
 import com.matiasmb.basecode.domain.interactor.GetPlaceDetailInteractorImpl
+import com.matiasmb.basecode.util.Resource
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -90,25 +91,25 @@ class GetPlaceDetailInteractorImplTest {
         val placeView = getPlaceDetailInteractor.transformResult(TestData.placeDetailSearch)
 
         // THEN
-        assertEquals("De Bijenkorf", placeView.name)
+        assertEquals("De Bijenkorf", placeView?.name)
         assertEquals(
             "Telephone: 010 282 3700\nEmail: testEmail\nWebsite: http://www.debijenkorf.nl",
-            placeView.contactInformation
+            placeView?.contactInformation
         )
-        assertTrue(placeView.rating is Float)
+        assertTrue(placeView?.rating is Float)
     }
 
     @Test
     fun `fetchPlaceDetails SHOULD return a flow with a place view object WHEN the api response with a success`() {
         // GIVEN
-        val placesApiService = mock<PlacesApiService> {
+        val placesRepository = mock<PlacesRepository> {
             onBlocking {
-                getPlacesDetails(
+                getPlacesDetail(
                     anyString()
                 )
             } doReturn TestData.serviceSuccessDetailPlaceResponse
         }
-        getPlaceDetailInteractor = GetPlaceDetailInteractorImpl(placesApiService)
+        getPlaceDetailInteractor = GetPlaceDetailInteractorImpl(placesRepository)
 
         runBlocking {
             // WHEN
@@ -116,12 +117,12 @@ class GetPlaceDetailInteractorImplTest {
 
             // THEN
             response.collect {
-                assertEquals("De Bijenkorf", it?.name)
+                assertEquals("De Bijenkorf", it.data?.name)
                 assertEquals(
                     "Swatch, launched in 1983 by Nicolas G. Hayek, is a leading Swiss watch maker and one of the world's most popular brands",
-                    it?.description
+                    it.data?.description
                 )
-                assertEquals(9.5F, it?.rating)
+                assertEquals(9.5F, it.data?.rating)
             }
         }
     }
@@ -129,14 +130,14 @@ class GetPlaceDetailInteractorImplTest {
     @Test
     fun `fetchPlaceDetails SHOULD return a flow with a null place view object WHEN the api response with a failure`() {
         // GIVEN
-        val placesApiService = mock<PlacesApiService> {
+        val placesRepository = mock<PlacesRepository> {
             onBlocking {
-                getPlacesDetails(
+                getPlacesDetail(
                     anyString()
                 )
-            } doReturn TestData.serviceFailureResponse
+            } doReturn TestData.serviceFailureDetailResponse
         }
-        getPlaceDetailInteractor = GetPlaceDetailInteractorImpl(placesApiService)
+        getPlaceDetailInteractor = GetPlaceDetailInteractorImpl(placesRepository)
 
         runBlocking {
             // WHEN
@@ -144,7 +145,7 @@ class GetPlaceDetailInteractorImplTest {
 
             // THEN
             response.collect {
-                assertNull(it)
+                assertTrue(it is Resource.Error)
             }
         }
     }

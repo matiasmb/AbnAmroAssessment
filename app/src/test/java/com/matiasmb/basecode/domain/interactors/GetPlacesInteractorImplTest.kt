@@ -4,9 +4,10 @@ import android.arch.core.executor.testing.InstantTaskExecutorRule
 import com.matiasmb.basecode.CoroutinesRule
 import com.matiasmb.basecode.TestData
 import com.matiasmb.basecode.TestData.location
+import com.matiasmb.basecode.data.repository.PlacesRepository
 import com.matiasmb.basecode.data.service.PlacesApiService
-import com.matiasmb.basecode.domain.interactor.GetPlaceDetailInteractorImpl
 import com.matiasmb.basecode.domain.interactor.GetPlacesInteractorImpl
+import com.matiasmb.basecode.util.Resource
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -51,22 +52,22 @@ class GetPlacesInteractorImplTest {
         val placeItemView = getPlacesInteractor.transformResult(TestData.dataPlaceSearchResponse.results)
 
         // THEN
-        assertTrue(placeItemView.isNotEmpty())
-        assertEquals("De Bijenkorf", placeItemView[0].name)
-        assertEquals("5b6a9a644ac28a002cf131d0", placeItemView[0].id)
+        assertTrue(placeItemView?.isNotEmpty() == true)
+        assertEquals("De Bijenkorf", placeItemView?.get(0)?.name)
+        assertEquals("5b6a9a644ac28a002cf131d0", placeItemView?.get(0)?.id)
     }
 
     @Test
     fun `fetchPlaceDetails SHOULD return a flow with a place view object WHEN the api response with a success`() {
         // GIVEN
-        val placesApiService = mock<PlacesApiService> {
+        val placesRepository = mock<PlacesRepository> {
             onBlocking {
                 getPlacesByNearLocation(
                     anyString()
                 )
             } doReturn TestData.serviceSuccessSearchPlacesResponse
         }
-        getPlacesInteractor = GetPlacesInteractorImpl(placesApiService)
+        getPlacesInteractor = GetPlacesInteractorImpl(placesRepository)
 
         runBlocking {
             // WHEN
@@ -75,10 +76,10 @@ class GetPlacesInteractorImplTest {
             // THEN
             response.collect {
                 assertNotNull(it)
-                assertEquals("De Bijenkorf", it?.get(0)?.name)
+                assertEquals("De Bijenkorf", it.data?.get(0)?.name)
                 assertEquals("Address: Coolsingel 105\n" +
                         "Postal code: 3012 AG\n" +
-                        "City: Rotterdam", it?.get(0)?.formattedAddress)
+                        "City: Rotterdam", it.data?.get(0)?.formattedAddress)
             }
         }
     }
@@ -86,14 +87,14 @@ class GetPlacesInteractorImplTest {
     @Test
     fun `fetchPlaceDetails SHOULD return a flow with a null place view object WHEN the api response with a failure`() {
         // GIVEN
-        val placesApiService = mock<PlacesApiService> {
+        val placesRepository = mock<PlacesRepository> {
             onBlocking {
                 getPlacesByNearLocation(
                     anyString()
                 )
-            } doReturn TestData.serviceFailureResponse
+            } doReturn TestData.serviceFailureSearchResponse
         }
-        getPlacesInteractor = GetPlacesInteractorImpl(placesApiService)
+        getPlacesInteractor = GetPlacesInteractorImpl(placesRepository)
 
         runBlocking {
             // WHEN
@@ -101,7 +102,7 @@ class GetPlacesInteractorImplTest {
 
             // THEN
             response.collect {
-                assertNull(it)
+                assertTrue(it is Resource.Error)
             }
         }
     }

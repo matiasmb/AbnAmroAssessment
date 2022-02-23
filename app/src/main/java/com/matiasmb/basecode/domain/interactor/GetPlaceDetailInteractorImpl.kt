@@ -6,8 +6,6 @@ import com.matiasmb.basecode.data.dto.Location
 import com.matiasmb.basecode.data.dto.Photo
 import com.matiasmb.basecode.data.dto.Place
 import com.matiasmb.basecode.data.repository.PlacesRepository
-import com.matiasmb.basecode.data.service.PlacesApiService
-import com.matiasmb.basecode.data.service.ResponseType
 import com.matiasmb.basecode.domain.model.PlaceView
 import com.matiasmb.basecode.util.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi
