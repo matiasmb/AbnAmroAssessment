@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AbnAmroExercise</string>
+    <string name="search_hint">Introduce a city</string>
+    <string name="error_fetching_data">Ups&#8230; something is not working properly!! please try again</string>
+
+    <string name="title_home">Places Search</string>
+    <string name="title_detail">Place Detail</string>
+
+</resources>

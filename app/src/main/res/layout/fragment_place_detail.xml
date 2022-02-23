@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.ui.detail.DetailFragment">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/placeImage"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/vertical_spacing" />
+
+    <TextView
+        android:id="@+id/placeName"
+        style="@android:style/TextAppearance.Large"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/placeImage"
+        android:paddingHorizontal="@dimen/horizontal_spacing"
+        android:layout_marginTop="@dimen/vertical_spacing" />
+
+    <RatingBar
+        android:id="@+id/placeRatingBar"
+        style="?android:attr/ratingBarStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/horizontal_spacing"
+        android:elevation="@dimen/elevation"
+        android:layout_marginTop="@dimen/vertical_small_spacing"
+        app:layout_constraintTop_toBottomOf="@id/placeName"
+        app:layout_constraintStart_toStartOf="@id/placeName"
+        android:visibility="invisible"
+        android:numStars="10"
+        tools:rating="4.2" />
+
+    <TextView
+        android:id="@+id/placeDescription"
+        style="@android:style/TextAppearance.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/placeRatingBar"
+        android:paddingHorizontal="@dimen/horizontal_spacing"
+        android:layout_marginTop="@dimen/vertical_spacing" />
+
+    <TextView
+        android:id="@+id/placeAddress"
+        style="@android:style/TextAppearance.Small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/placeDescription"
+        android:paddingHorizontal="@dimen/horizontal_spacing"
+        android:layout_marginTop="@dimen/vertical_spacing" />
+
+    <TextView
+        android:id="@+id/placeContactInformation"
+        style="@android:style/TextAppearance.Small"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/placeAddress"
+        android:paddingHorizontal="@dimen/horizontal_spacing"
+        android:layout_marginTop="@dimen/vertical_spacing" />
+
+    <View
+        android:id="@+id/loading_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/shadow_spinner"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="@dimen/place_holder_medium_size"
+        android:layout_height="@dimen/place_holder_medium_size"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

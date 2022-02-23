@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/searchFragment">
+
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.matiasmb.basecode.presentation.ui.search.SearchPlacesFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_search_places">
+        <action
+            android:id="@+id/action_searchFragment_to_articleList"
+            app:destination="@id/placeDetailsFragment">
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/placeDetailsFragment"
+        android:name="com.matiasmb.basecode.presentation.ui.detail.DetailFragment"
+        android:label="@string/title_detail"
+        tools:layout="@layout/fragment_place_detail">
+        <argument
+            android:name="placeId"
+            app:argType="string" />
+    </fragment>
+</navigation>
