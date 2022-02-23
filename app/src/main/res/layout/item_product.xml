@@ -7,7 +7,7 @@
     android:padding="@dimen/common_spacing">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/card_layout"
+        android:id="@+id/cardLayout"
         android:layout_width="@dimen/match_constraint"
         android:layout_height="@dimen/match_constraint"
         layout:cardUseCompatPadding="true"
@@ -17,7 +17,7 @@
         layout:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/venueName"
+        android:id="@+id/placeNameTitleCard"
         style="@android:style/TextAppearance.Medium"
         android:layout_width="@dimen/match_constraint"
         android:layout_height="wrap_content"
@@ -25,14 +25,14 @@
         android:layout_marginEnd="@dimen/horizontal_spacing"
         android:elevation="@dimen/elevation"
         layout:layout_constraintLeft_toLeftOf="parent"
-        layout:layout_constraintRight_toRightOf="@id/card_layout"
+        layout:layout_constraintRight_toRightOf="@id/cardLayout"
         layout:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="@dimen/vertical_spacing"
-        tools:text="{venue name}" />
+        tools:text="{place name}" />
 
 
     <TextView
-        android:id="@+id/venueAddress"
+        android:id="@+id/placeAddressCard"
         style="@android:style/TextAppearance.Small"
         android:layout_width="@dimen/match_constraint"
         android:layout_height="wrap_content"
@@ -41,8 +41,8 @@
         android:elevation="@dimen/elevation"
         android:paddingBottom="@dimen/vertical_spacing"
         layout:layout_constraintLeft_toLeftOf="parent"
-        layout:layout_constraintRight_toRightOf="@id/card_layout"
-        layout:layout_constraintTop_toBottomOf="@id/venueName"
+        layout:layout_constraintRight_toRightOf="@id/cardLayout"
+        layout:layout_constraintTop_toBottomOf="@id/placeNameTitleCard"
         tools:text="venue address" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

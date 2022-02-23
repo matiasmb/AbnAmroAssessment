@@ -31,4 +31,4 @@
 #What could be better
 - More unit test for repository and data base
 - Implement a gallery for all the photos and don't show only the latest one
-- More ui testing with a mocked server
+- More ui testing with a mocked server and with a better wait for loading data.

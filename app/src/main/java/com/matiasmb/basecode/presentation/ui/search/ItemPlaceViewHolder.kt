@@ -12,8 +12,8 @@ class ItemPlaceViewHolder(private val itemPlaceView: ItemPlaceView, private val 
     override fun bind(binding: ItemProductBinding, position: Int) {
         with(binding) {
             with(itemPlaceView) {
-                venueName.text = name
-                venueAddress.text = formattedAddress
+                placeNameTitleCard.text = name
+                placeAddressCard.text = formattedAddress
             }
             setAnimation(binding.root)
             binding.root.setOnClickListener {
