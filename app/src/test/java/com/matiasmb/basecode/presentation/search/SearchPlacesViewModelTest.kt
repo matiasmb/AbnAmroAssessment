@@ -16,9 +16,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import org.junit.After
 import org.junit.Assert.assertTrue
-import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
@@ -33,14 +31,6 @@ class SearchPlacesViewModelTest {
 
     @get:Rule
     val rule = InstantTaskExecutorRule()
-
-    @Before
-    fun setUp() {
-    }
-
-    @After
-    fun tearDown() {
-    }
 
     @Test
     fun `handleIntent SearchTapped SHOULD update the viewStateContent to LoadData WHEN the interactor return a PlaceView object`() {

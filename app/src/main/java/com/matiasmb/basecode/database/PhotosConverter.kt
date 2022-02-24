@@ -1,7 +1,6 @@
 package com.matiasmb.basecode.database
 
 import androidx.room.TypeConverter
-import com.matiasmb.basecode.data.dto.Location
 import com.matiasmb.basecode.data.dto.Photo
 
 class PhotosConverter {

@@ -2,7 +2,6 @@ package com.matiasmb.basecode.data.dto
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverter
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "places")

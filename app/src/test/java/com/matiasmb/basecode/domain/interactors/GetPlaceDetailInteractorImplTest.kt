@@ -1,7 +1,5 @@
 package com.matiasmb.basecode.domain.interactors
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
-import com.matiasmb.basecode.CoroutinesRule
 import com.matiasmb.basecode.TestData
 import com.matiasmb.basecode.TestData.location
 import com.matiasmb.basecode.data.repository.PlacesRepository
@@ -12,18 +10,11 @@ import com.nhaarman.mockitokotlin2.mock
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.*
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers.anyString
 
 @ExperimentalCoroutinesApi
 class GetPlaceDetailInteractorImplTest {
-
-    @get:Rule
-    var coroutinesRule = CoroutinesRule()
-
-    @get:Rule
-    val rule = InstantTaskExecutorRule()
 
     private lateinit var getPlaceDetailInteractor: GetPlaceDetailInteractorImpl
 

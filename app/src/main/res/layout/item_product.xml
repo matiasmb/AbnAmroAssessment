@@ -22,12 +22,12 @@
         android:layout_width="@dimen/match_constraint"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/horizontal_spacing"
+        android:layout_marginTop="@dimen/vertical_spacing"
         android:layout_marginEnd="@dimen/horizontal_spacing"
         android:elevation="@dimen/elevation"
         layout:layout_constraintLeft_toLeftOf="parent"
         layout:layout_constraintRight_toRightOf="@id/cardLayout"
         layout:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="@dimen/vertical_spacing"
         tools:text="{place name}" />
 
 
@@ -43,6 +43,6 @@
         layout:layout_constraintLeft_toLeftOf="parent"
         layout:layout_constraintRight_toRightOf="@id/cardLayout"
         layout:layout_constraintTop_toBottomOf="@id/placeNameTitleCard"
-        tools:text="venue address" />
+        tools:text="place address" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

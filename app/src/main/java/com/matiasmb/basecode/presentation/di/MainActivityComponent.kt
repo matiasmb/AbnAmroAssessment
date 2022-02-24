@@ -1,7 +1,7 @@
 package com.matiasmb.basecode.presentation.di
 
 import com.matiasmb.basecode.presentation.MainActivity
-import com.matiasmb.basecode.presentation.PerActivity
+import com.matiasmb.basecode.PerActivity
 import dagger.Module
 import dagger.Subcomponent
 

@@ -1,6 +1,6 @@
 package com.matiasmb.basecode.presentation.di
 
-import com.matiasmb.basecode.presentation.PerFragment
+import com.matiasmb.basecode.PerFragment
 import com.matiasmb.basecode.presentation.ui.detail.DetailFragment
 import com.matiasmb.basecode.presentation.ui.detail.DetailPlaceModule
 import com.matiasmb.basecode.presentation.ui.search.SearchPlacesFragment

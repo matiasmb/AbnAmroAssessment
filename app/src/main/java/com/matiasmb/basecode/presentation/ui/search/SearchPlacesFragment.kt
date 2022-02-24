@@ -7,7 +7,6 @@ import androidx.annotation.VisibleForTesting
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Lifecycle.State.STARTED
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -17,9 +16,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.matiasmb.basecode.R
 import com.matiasmb.basecode.databinding.FragmentSearchPlacesBinding
 import com.matiasmb.basecode.domain.model.ItemPlaceView
-import com.matiasmb.basecode.util.viewBinding
 import com.matiasmb.basecode.presentation.ViewModelFactory
 import com.matiasmb.basecode.presentation.ui.search.SearchPlacesViewState.ViewStateContent.*
+import com.matiasmb.basecode.util.viewBinding
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.GroupieViewHolder
 import com.xwray.groupie.viewbinding.BindableItem

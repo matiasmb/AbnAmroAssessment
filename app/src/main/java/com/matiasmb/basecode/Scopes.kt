@@ -1,4 +1,4 @@
-package com.matiasmb.basecode.presentation
+package com.matiasmb.basecode
 
 import javax.inject.Scope
 

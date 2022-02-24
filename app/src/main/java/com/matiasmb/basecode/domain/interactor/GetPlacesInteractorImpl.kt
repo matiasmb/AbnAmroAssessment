@@ -4,7 +4,6 @@ import androidx.annotation.VisibleForTesting
 import com.matiasmb.basecode.data.dto.Location
 import com.matiasmb.basecode.data.dto.Place
 import com.matiasmb.basecode.data.repository.PlacesRepository
-import com.matiasmb.basecode.data.repository.PlacesRepositoryImpl
 import com.matiasmb.basecode.domain.model.ItemPlaceView
 import com.matiasmb.basecode.util.Resource
 import kotlinx.coroutines.ExperimentalCoroutinesApi

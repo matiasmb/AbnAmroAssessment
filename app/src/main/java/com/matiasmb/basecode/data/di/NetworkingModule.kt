@@ -6,9 +6,9 @@ import com.matiasmb.basecode.BuildConfig
 import com.matiasmb.basecode.MyApplication
 import com.matiasmb.basecode.data.FoursquareApiClient
 import com.matiasmb.basecode.data.repository.PlacesRepository
-import com.matiasmb.basecode.database.PlaceDatabase
 import com.matiasmb.basecode.data.repository.PlacesRepositoryImpl
 import com.matiasmb.basecode.data.service.PlacesApiService
+import com.matiasmb.basecode.database.PlaceDatabase
 import dagger.Lazy
 import dagger.Module
 import dagger.Provides

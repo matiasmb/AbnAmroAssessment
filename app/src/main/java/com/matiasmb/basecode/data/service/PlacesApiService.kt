@@ -1,8 +1,6 @@
 package com.matiasmb.basecode.data.service
 
 import com.matiasmb.basecode.data.dto.Place
-import com.matiasmb.basecode.data.dto.PlaceSearchResponse
-import kotlinx.coroutines.flow.Flow
 
 interface PlacesApiService {
 

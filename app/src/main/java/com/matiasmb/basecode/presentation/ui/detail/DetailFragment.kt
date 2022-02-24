@@ -14,10 +14,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.matiasmb.basecode.R
 import com.matiasmb.basecode.databinding.FragmentPlaceDetailBinding
 import com.matiasmb.basecode.domain.model.PlaceView
-import com.matiasmb.basecode.util.viewBinding
 import com.matiasmb.basecode.presentation.ViewModelFactory
 import com.matiasmb.basecode.presentation.ui.detail.DetailPlaceViewState.ViewStateContent.*
 import com.matiasmb.basecode.util.loadImage
+import com.matiasmb.basecode.util.viewBinding
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.coroutines.launch
 import javax.inject.Inject
